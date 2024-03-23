@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Transition } from "@headlessui/react"; // Import Transition from headlessui
+import { motion } from "framer-motion";
 import { Route, Routes } from "react-router-dom";
 import { Footer, Loader, NavBar, StarsCanvas } from "./components";
 import { Home, FAQ, NFCTags, HowItWorks, NFCBusinessCards } from "./pages";
@@ -17,36 +17,31 @@ function App() {
 
     return (
         <div className="bg-black min-h-screen flex justify-center items-center">
-            <Transition
-                show={showLoader}
-                enter="transition-opacity duration-500"
-                enterFrom="opacity-100"
-                enterTo="opacity-0"
-                leave="transition-opacity duration-500"
-                leaveFrom="opacity-0"
-                leaveTo="opacity-100"
+            <motion.div
+                className="absolute inset-0 flex justify-center items-center"
+                initial={{ opacity: 1 }}
+                animate={{ opacity: showLoader ? 1 : 0 }}
+                transition={{ duration: 0.5 }}
             >
                 <Loader />
-            </Transition>
-            <Transition
-                show={!showLoader}
-                enter="transition-opacity duration-500"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-500"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+            </motion.div>
+            <motion.div
+                className="w-full max-w-screen-xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: showLoader ? 0 : 1 }}
+                transition={{ duration: 0.5 }}
             >
-                <div className="w-full max-w-screen-xl">
-                    <NavBar />
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/faq" element={<FAQ />} />
-                        {/* Define other routes */}
-                    </Routes>
-                    <Footer />
-                </div>
-            </Transition>
+                <NavBar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/faq" element={<FAQ />} />
+                    <Route path="/nfc-tags" element={<NFCTags />} />
+                    <Route path="/how-it-works" element={<HowItWorks />} />
+                    <Route path="/nfc-business-cards" element={<NFCBusinessCards />} />
+                    {/* Define other routes */}
+                </Routes>
+                <Footer />
+            </motion.div>
         </div>
     );
 }
