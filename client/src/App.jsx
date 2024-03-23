@@ -40,6 +40,7 @@ function App() {
                     <Route path="/nfc-business-cards" element={<NFCBusinessCards />} />
                     {/* Define other routes */}
                 </Routes>
+<StarsCanvas />
                 <Footer />
             </motion.div>
         </div>
