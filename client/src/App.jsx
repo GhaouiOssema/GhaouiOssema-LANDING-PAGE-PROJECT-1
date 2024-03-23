@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 function App() {
     const [showLoader, setShowLoader] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -22,7 +23,7 @@ function App() {
                 <>
                     <div className="w-full relative z-0 bg-primary">
                         <div>
-                            <NavBar />
+                            <NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
                         </div>
                         {/* <div className=" h-screen" /> */}
                         <div className="container">

@@ -1,22 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { FiAlertCircle } from "react-icons/fi";
-import { useState } from "react";
 
-const ExampleWrapper = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    return (
-        <div className="px-4 py-64 bg-slate-900 grid place-content-center">
-            <button
-                onClick={() => setIsOpen(true)}
-                className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium px-4 py-2 rounded hover:opacity-90 transition-opacity">
-                Open Modal
-            </button>
-            <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} />
-        </div>
-    );
-};
-
-const SpringModal = ({ isOpen, setIsOpen }) => {
+const OrdersModal = ({ isOpen, setIsOpen }) => {
     return (
         <AnimatePresence>
             {isOpen && (
@@ -65,4 +50,4 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
     );
 };
 
-export default ExampleWrapper;
+export default OrdersModal;
