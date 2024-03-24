@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { OrdersModal } from ".";
 
-const Navbar = ({ isOpen, setIsOpen }) => {
+const Navbar = ({ isOpen, setIsOpen, productCount, setProductCount }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -37,8 +37,11 @@ const Navbar = ({ isOpen, setIsOpen }) => {
                         <button
                             type="button"
                             onClick={() => setIsOpen(true)}
-                            className="text-white font-medium rounded-lg text-sm px-4 py-2 text-center bg-gradient-to-br from-violet-600 to-indigo-600">
-                            view orders
+                            className="flex justify-between items-center text-white font-medium rounded-lg text-sm px-4 py-2 text-center bg-gradient-to-br from-violet-600 to-indigo-600">
+                            <span className="pr-2">View Orders</span>
+                            <span className="bg-white w-5 h-5 flex justify-center items-center rounded-full text-violet-600">
+                                {productCount}
+                            </span>
                         </button>
                         <button
                             onClick={toggleSidebar}
