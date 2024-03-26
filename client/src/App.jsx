@@ -3,11 +3,21 @@ import { Route, Routes } from "react-router-dom";
 import { Footer, Loader, NavBar, StarsCanvas } from "./components";
 import { Home, FAQ, NFCTags, HowItWorks, NFCBusinessCards } from "./pages";
 import { useEffect, useState } from "react";
+import InternalSideBard from "./components/InternalSideBard";
 
 function App() {
     const [showLoader, setShowLoader] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
     const [productCount, setProductCount] = useState(0);
+    const [open, setOpen] = useState(false);
+
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -25,11 +35,16 @@ function App() {
                     <div className="w-full relative z-0 bg-primary">
                         <div>
                             <NavBar
-                                isOpen={isOpen}
-                                setIsOpen={setIsOpen}
+                                open={open}
+                                setOpen={setOpen}
                                 productCount={productCount}
                                 setProductCount={setProductCount}
+                                handleDrawerOpen={handleDrawerOpen}
+                                handleDrawerClose={handleDrawerClose}
                             />
+                        </div>
+                        <div className="">
+                            <InternalSideBard open={open} setOpen={setOpen} />
                         </div>
                         {/* <div className=" h-screen" /> */}
                         <div className="container">
@@ -50,8 +65,8 @@ function App() {
                                 />
                             </Routes>
                         </div>
-                        <StarsCanvas />
-                        <Footer />
+                        {/* <StarsCanvas /> */}
+                        {/* <Footer /> */}
                     </div>
                 </>
             )}

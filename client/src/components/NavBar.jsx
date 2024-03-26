@@ -1,111 +1,235 @@
-import { useState } from "react";
-import { menuItems } from "../utils";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { OrdersModal } from ".";
+import * as React from "react";
+import { styled, alpha } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import Badge from "@mui/material/Badge";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MailIcon from "@mui/icons-material/Mail";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import { useTheme } from "@emotion/react";
 
-const Navbar = ({ isOpen, setIsOpen, productCount, setProductCount }) => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-    const toggleSidebar = () => {
-        setIsSidebarOpen((prev) => !prev);
+const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing(3),
+        width: "auto",
+    },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "inherit",
+    "& .MuiInputBase-input": {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+        transition: theme.transitions.create("width"),
+        width: "100%",
+        [theme.breakpoints.up("md")]: {
+            width: "20ch",
+        },
+    },
+}));
+
+export default function NavBar({ open, setOpen }) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const handleProfileMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
     };
 
-    return (
-        <>
-            <OrdersModal isOpen={isOpen} setIsOpen={setIsOpen} />
-            <motion.nav
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
-                transition={{ duration: 1 }}
-                className="mt-5 absolute w-full z-20 top-0 start-0 px-5 ">
-                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2 rounded-xl bg-white">
-                    <Link
-                        to="/"
-                        className="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img
-                            src="https://cdn.logo.com/hotlink-ok/logo-social.png"
-                            className="h-8"
-                            alt="Logo"
-                        />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap ">
-                            Logo
-                        </span>
-                    </Link>
-                    <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                        <button
-                            type="button"
-                            onClick={() => setIsOpen(true)}
-                            className="flex justify-between items-center text-white font-medium rounded-lg text-sm px-4 py-2 text-center bg-gradient-to-br from-violet-600 to-indigo-600">
-                            <span className="pr-2">View Orders</span>
-                            <span className="bg-white w-5 h-5 flex justify-center items-center rounded-full text-violet-600">
-                                {productCount}
-                            </span>
-                        </button>
-                        <button
-                            onClick={toggleSidebar}
-                            type="button"
-                            className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden transform transition-transform ${
-                                isSidebarOpen ? "rotate-90" : "rotate-0"
-                            }`}
-                            aria-controls="navbar-sticky"
-                            aria-expanded={isSidebarOpen ? "true" : "false"}>
-                            <span className="sr-only">Open main menu</span>
-                            <svg
-                                className="w-5 h-5"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                {isSidebarOpen ? (
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                ) : (
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M4 6h16M4 12h16m-7 6h7"
-                                    />
-                                )}
-                            </svg>
-                        </button>
-                    </div>
-                    <div
-                        className={`${
-                            isSidebarOpen ? "block" : "hidden"
-                        } md:block w-full md:w-auto md:order-1`}
-                        id="navbar-sticky">
-                        <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
-                            {menuItems.map((item, index) => (
-                                <motion.li
-                                    key={index}
-                                    initial={{ opacity: 0, y: -20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{
-                                        duration: 1,
-                                        delay: index * 0.1,
-                                    }}>
-                                    <Link
-                                        to={`/${item.href}`}
-                                        className="block py-2 px-3 text-gray-700 rounded md:bg-transparent hover:text-blue-700 md:p-0"
-                                        aria-current="page">
-                                        {item.text}
-                                    </Link>
-                                </motion.li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            </motion.nav>
-        </>
-    );
-};
+    const handleMobileMenuClose = () => {
+        setMobileMoreAnchorEl(null);
+    };
 
-export default Navbar;
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+    };
+
+    const handleMobileMenuOpen = (event) => {
+        setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const menuId = "primary-search-account-menu";
+    const renderMenu = (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}>
+            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        </Menu>
+    );
+
+    const mobileMenuId = "primary-search-account-menu-mobile";
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}>
+            <MenuItem>
+                <IconButton
+                    size="large"
+                    aria-label="show 4 new mails"
+                    color="inherit">
+                    <Badge badgeContent={4} color="error">
+                        <MailIcon />
+                    </Badge>
+                </IconButton>
+                <p>Messages</p>
+            </MenuItem>
+            <MenuItem>
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit">
+                    <Badge badgeContent={17} color="error">
+                        <NotificationsIcon />
+                    </Badge>
+                </IconButton>
+                <p>Notifications</p>
+            </MenuItem>
+            <MenuItem onClick={handleProfileMenuOpen}>
+                <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit">
+                    <AccountCircle />
+                </IconButton>
+                <p>Profile</p>
+            </MenuItem>
+        </Menu>
+    );
+
+    return (
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="fixed">
+                <Toolbar>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ display: { xs: "none", sm: "block" } }}>
+                        MUI
+                    </Typography>
+                    <Search>
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            placeholder="Search…"
+                            inputProps={{ "aria-label": "search" }}
+                        />
+                    </Search>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={() => setOpen((prev) => !prev)}
+                        sx={{ mr: 2 }}>
+                        {open ? <ChevronRightIcon /> : <MenuIcon />}
+                    </IconButton>
+                    <Box sx={{ flexGrow: 1 }} />
+                    <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="show 4 new mails"
+                            color="inherit">
+                            <Badge badgeContent={4} color="error">
+                                <MailIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            aria-label="show 17 new notifications"
+                            color="inherit">
+                            <Badge badgeContent={17} color="error">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-controls={menuId}
+                            aria-haspopup="true"
+                            onClick={handleProfileMenuOpen}
+                            color="inherit">
+                            <AccountCircle />
+                        </IconButton>
+                    </Box>
+                    <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="show more"
+                            aria-controls={mobileMenuId}
+                            aria-haspopup="true"
+                            onClick={handleMobileMenuOpen}
+                            color="inherit">
+                            <MoreIcon />
+                        </IconButton>
+                    </Box>
+                </Toolbar>
+            </AppBar>
+            {renderMobileMenu}
+            {renderMenu}
+        </Box>
+    );
+}
