@@ -32,19 +32,17 @@ function App() {
                 <Loader />
             ) : (
                 <>
-                    <div className="w-full relative z-0 bg-primary">
-                        <div>
-                            <NavBar
-                                open={open}
-                                setOpen={setOpen}
-                                productCount={productCount}
-                                setProductCount={setProductCount}
-                                handleDrawerOpen={handleDrawerOpen}
-                                handleDrawerClose={handleDrawerClose}
-                            />
-                        </div>
-                        <div className="">
-                            <InternalSideBard open={open} setOpen={setOpen} />
+                    <div className="w-full relative z-0 bg-white">
+                        <div className="flex flex-col ">
+                            <div className="w-full">
+                                <NavBar />
+                            </div>
+                            <div>
+                                <InternalSideBard
+                                    open={open}
+                                    setOpen={setOpen}
+                                />
+                            </div>
                         </div>
                         {/* <div className=" h-screen" /> */}
                         <div className="container">
