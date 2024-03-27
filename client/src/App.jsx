@@ -1,6 +1,13 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { Footer, Loader, NavBar, StarsCanvas } from "./components";
+import {
+    Footer,
+    InternalSideBarLeft,
+    Loader,
+    NavBar,
+    StarsCanvas,
+    InternalSideBarRight,
+} from "./components";
 
 import {
     Home,
@@ -11,8 +18,6 @@ import {
     Dashboard,
 } from "./pages";
 import { useEffect, useState } from "react";
-import InternalSideBarLeft from "./components/InternalSideBarLeft";
-import InternalSideBarRigth from "./components/InternalSideBarRight";
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -45,7 +50,7 @@ function App() {
                 <div className="flex">
                     <div className="">
                         {isMobileView ? (
-                            <InternalSideBarRigth
+                            <InternalSideBarRight
                                 open={open}
                                 setOpen={setOpen}
                             />
@@ -56,7 +61,7 @@ function App() {
                             />
                         )}
                     </div>
-                    <div className="container">
+                    <div className="container p-6">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/Dashboard" element={<Dashboard />} />

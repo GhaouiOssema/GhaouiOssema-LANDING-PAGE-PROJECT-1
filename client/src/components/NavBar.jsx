@@ -1,5 +1,5 @@
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import InternalSideBard from "./InternalSideBarLeft";
+import { Link } from "react-router-dom";
 
 export default function NavBar({ open, setOpen }) {
     return (

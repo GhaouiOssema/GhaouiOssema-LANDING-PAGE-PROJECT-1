@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const InternalSideBarLeft = ({ open, setOpen }) => {
     const menus = [
-        { name: "dashboard", link: "/", icon: MdOutlineDashboard },
+        { name: "dashboard", link: "/dashboard", icon: MdOutlineDashboard },
         { name: "user", link: "/", icon: AiOutlineUser },
         { name: "messages", link: "/", icon: FiMessageSquare },
         {
@@ -26,7 +26,7 @@ const InternalSideBarLeft = ({ open, setOpen }) => {
 
     return (
         <div
-            className={`bg-[#f49831] min-h-screen  ${
+            className={`bg-[#f49831] min-h-screen ${
                 open ? "w-72" : "w-16"
             } duration-500 text-gray-100 px-4`}>
             <div
