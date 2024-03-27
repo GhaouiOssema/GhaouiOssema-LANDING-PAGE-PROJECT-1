@@ -3,3 +3,4 @@ export { default as Home } from "./Home";
 export { default as NFCTags } from "./NFCTags";
 export { default as HowItWorks } from "./HowItWorks";
 export { default as NFCBusinessCards } from "./NFCBusinessCards";
+export { default as Dashboard } from "./Dashboard";

@@ -1,73 +1,83 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { Footer, Loader, NavBar, StarsCanvas } from "./components";
-import { Home, FAQ, NFCTags, HowItWorks, NFCBusinessCards } from "./pages";
+
+import {
+    Home,
+    FAQ,
+    NFCTags,
+    HowItWorks,
+    NFCBusinessCards,
+    Dashboard,
+} from "./pages";
 import { useEffect, useState } from "react";
-import InternalSideBard from "./components/InternalSideBard";
+import InternalSideBarLeft from "./components/InternalSideBarLeft";
+import InternalSideBarRigth from "./components/InternalSideBarRight";
 
 function App() {
-    const [showLoader, setShowLoader] = useState(true);
-    const [isOpen, setIsOpen] = useState(false);
-    const [productCount, setProductCount] = useState(0);
     const [open, setOpen] = useState(false);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+    const [isMobileView, setIsMobileView] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowLoader(false);
-        }, 3000);
+        const handleResize = () => {
+            setIsMobileView(window.innerWidth <= 768); // Adjust this threshold as needed
+        };
 
-        return () => clearTimeout(timer);
+        // Initial check
+        handleResize();
+
+        // Event listener for window resize
+        window.addEventListener("resize", handleResize);
+
+        // Clean up event listener
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
+
     return (
-        <div className="bg-black">
-            {showLoader ? (
-                <Loader />
-            ) : (
-                <>
-                    <div className="w-full relative z-0 bg-white">
-                        <div className="flex flex-col ">
-                            <div className="w-full">
-                                <NavBar />
-                            </div>
-                            <div>
-                                <InternalSideBard
-                                    open={open}
-                                    setOpen={setOpen}
-                                />
-                            </div>
-                        </div>
-                        {/* <div className=" h-screen" /> */}
-                        <div className="container">
-                            <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/faq" element={<FAQ />} />
-                                <Route
-                                    path="/plaques-nfc"
-                                    element={<NFCTags />}
-                                />
-                                <Route
-                                    path="/comment-ca-marche"
-                                    element={<HowItWorks />}
-                                />
-                                <Route
-                                    path="/cartes-de-visite-nfc"
-                                    element={<NFCBusinessCards />}
-                                />
-                            </Routes>
-                        </div>
-                        {/* <StarsCanvas /> */}
-                        {/* <Footer /> */}
+        <div className="w-full relative z-0 bg-white">
+            <div className="flex flex-col ">
+                <div className="w-full">
+                    <NavBar open={open} setOpen={setOpen} />
+                </div>
+                <div className="flex">
+                    <div className="">
+                        {isMobileView ? (
+                            <InternalSideBarRigth
+                                open={open}
+                                setOpen={setOpen}
+                            />
+                        ) : (
+                            <InternalSideBarLeft
+                                open={open}
+                                setOpen={setOpen}
+                            />
+                        )}
                     </div>
-                </>
-            )}
+                    <div className="container">
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/Dashboard" element={<Dashboard />} />
+                            <Route path="/faq" element={<FAQ />} />
+                            <Route path="/plaques-nfc" element={<NFCTags />} />
+                            <Route
+                                path="/comment-ca-marche"
+                                element={<HowItWorks />}
+                            />
+                            <Route
+                                path="/cartes-de-visite-nfc"
+                                element={<NFCBusinessCards />}
+                            />
+                        </Routes>
+                    </div>
+                </div>
+            </div>
+            {/* <div className=" h-screen" /> */}
+
+            {/* <StarsCanvas /> */}
+            {/* <Footer /> */}
         </div>
     );
 }

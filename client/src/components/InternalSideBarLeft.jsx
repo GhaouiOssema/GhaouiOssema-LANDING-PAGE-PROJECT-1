@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { HiMenuAlt3 } from "react-icons/hi";
+import React from "react";
+import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiSettings4Line } from "react-icons/ri";
 import { TbReportAnalytics } from "react-icons/tb";
@@ -7,7 +7,7 @@ import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const InternalSideBard = () => {
+const InternalSideBarLeft = ({ open, setOpen }) => {
     const menus = [
         { name: "dashboard", link: "/", icon: MdOutlineDashboard },
         { name: "user", link: "/", icon: AiOutlineUser },
@@ -23,18 +23,20 @@ const InternalSideBard = () => {
         { name: "Saved", link: "/", icon: AiOutlineHeart, margin: true },
         { name: "Setting", link: "/", icon: RiSettings4Line },
     ];
-    const [open, setOpen] = useState(true);
+
     return (
         <div
-            className={`bg-[#f49831] min-h-screen ${
+            className={`bg-[#f49831] min-h-screen  ${
                 open ? "w-72" : "w-16"
             } duration-500 text-gray-100 px-4`}>
-            <div className="py-3 flex justify-end">
-                <HiMenuAlt3
-                    size={26}
-                    className="cursor-pointer"
-                    onClick={() => setOpen(!open)}
-                />
+            <div
+                className="py-3 flex justify-end"
+                onClick={() => setOpen((prev) => !prev)}>
+                {open ? (
+                    <HiX size={26} className="cursor-pointer" />
+                ) : (
+                    <HiMenuAlt3 size={26} className="cursor-pointer" />
+                )}
             </div>
             <div className="mt-4 flex flex-col gap-4 relative">
                 {menus?.map((menu, i) => (
@@ -45,7 +47,9 @@ const InternalSideBard = () => {
                             menu?.margin && "mt-5"
                         } group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}>
                         <div>
-                            {React.createElement(menu?.icon, { size: "20" })}
+                            {React.createElement(menu?.icon, {
+                                size: "20",
+                            })}
                         </div>
                         <h2
                             style={{
@@ -70,4 +74,4 @@ const InternalSideBard = () => {
     );
 };
 
-export default InternalSideBard;
+export default InternalSideBarLeft;
