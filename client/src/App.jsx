@@ -7,6 +7,7 @@ import {
     NavBar,
     StarsCanvas,
     InternalSideBarRight,
+    BottomNavBar,
 } from "./components";
 
 import {
@@ -26,7 +27,7 @@ function App() {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobileView(window.innerWidth <= 768); // Adjust this threshold as needed
+            setIsMobileView(window.innerWidth <= 1024); // Adjust this threshold as needed
         };
 
         // Initial check
@@ -74,6 +75,7 @@ function App() {
                             />
                         </Routes>
                     </div>
+                    {isMobileView && <BottomNavBar />}
                 </div>
             </div>
             {/* <div className=" h-screen" /> */}

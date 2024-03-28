@@ -12,3 +12,4 @@ export { default as MidumeCardLayout } from "./card/MidumeCardLayout";
 export { default as NotificationCard } from "./card/NotificationCard";
 export { default as Carousel } from "./Carousel";
 export { default as ProfileCard } from "./card/ProfileCard";
+export { default as BottomNavBar } from "./BottomNavBar";
