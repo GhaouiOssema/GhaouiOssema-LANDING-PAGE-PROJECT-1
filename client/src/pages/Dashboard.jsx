@@ -37,9 +37,9 @@ const Dashboard = () => {
                     ))}
                     <div className="grid max-w-xl mx-auto px-3 border border-primary rounded-md mt-5 mb-5">
                         <div className="text-center p-6">
-                            <div className="mb-15px flex items-center justify-around">
+                            <div className="mb-15px flex items-center justify-start">
                                 <h3
-                                    className={`font-euclid text-primary text-sm font-semibold cursor-pointer ${
+                                    className={`mr-2 font-euclid text-primary text-sm font-semibold cursor-pointer ${
                                         activeTab === "deliveries"
                                             ? "text-blue-500"
                                             : ""
@@ -49,7 +49,7 @@ const Dashboard = () => {
                                     }>
                                     Mes Livraisons
                                 </h3>
-                                <h3 className="font-euclid text-primary text-sm font-semibold">
+                                <h3 className="mr-2 font-euclid text-primary text-sm font-semibold">
                                     |{" "}
                                 </h3>
                                 <h3
