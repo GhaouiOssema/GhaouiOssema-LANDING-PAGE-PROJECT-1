@@ -90,7 +90,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             ) : (
-                <div className="max-w-[1280px] mx-auto px-3 pb-32 sm:px-8  sm:pb-32 pt-10">
+                <div className="max-w-[1280px] mx-auto px-3 pb-32 sm:px-8 sm:pb-32 pt-10">
                     <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                         {data1.map((elem, idx) => (
                             <SmallCardLayout

@@ -8,6 +8,7 @@ import {
     StarsCanvas,
     InternalSideBarRight,
     BottomNavBar,
+    IconBreadcrumbs,
 } from "./components";
 
 import {
@@ -60,6 +61,11 @@ function App() {
                         <InternalSideBarLeft open={open} setOpen={setOpen} />
                     )}
                     <div className="w-full">
+                        <div className="w-full mx-auto px-5">
+                            <div className="grid max-w-xl lg:max-w-[1220px] mx-auto px-3 border border-primary rounded-md mt-5 mb-5">
+                                <IconBreadcrumbs />
+                            </div>
+                        </div>
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/Dashboard" element={<Dashboard />} />
@@ -75,8 +81,8 @@ function App() {
                             />
                         </Routes>
                     </div>
-                    {isMobileView && <BottomNavBar />}
                 </div>
+                {isMobileView && <BottomNavBar />}
             </div>
             {/* <div className=" h-screen" /> */}
 
