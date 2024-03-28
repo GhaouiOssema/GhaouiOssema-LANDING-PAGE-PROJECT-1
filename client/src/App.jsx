@@ -60,7 +60,7 @@ function App() {
                     ) : (
                         <InternalSideBarLeft open={open} setOpen={setOpen} />
                     )}
-                    <div className="w-full overflow-y-auto my-2 py-auto">
+                    <div className="w-full overflow-y-auto min-h-screen my-10 py-auto">
                         <div className="w-full mx-auto px-5">
                             <div className="grid max-w-xl lg:max-w-[1220px] mx-auto px-3 border border-primary rounded-md">
                                 <IconBreadcrumbs />
