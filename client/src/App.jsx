@@ -61,7 +61,7 @@ function App() {
                             />
                         )}
                     </div>
-                    <div className="container p-6">
+                    <div className=" w-full">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/Dashboard" element={<Dashboard />} />

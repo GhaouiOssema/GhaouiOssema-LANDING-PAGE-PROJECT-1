@@ -10,3 +10,5 @@ export { default as InternalSideBarRight } from "./InternalSideBarRight";
 export { default as SmallCardLayout } from "./card/SmallCardLayout";
 export { default as MidumeCardLayout } from "./card/MidumeCardLayout";
 export { default as NotificationCard } from "./card/NotificationCard";
+export { default as Carousel } from "./Carousel";
+export { default as ProfileCard } from "./card/ProfileCard";
