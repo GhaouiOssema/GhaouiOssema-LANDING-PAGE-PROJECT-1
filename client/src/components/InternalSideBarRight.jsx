@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 
 const InternalSideBarRight = ({ open, setOpen }) => {
     const menus = [
-        { name: "dashboard", link: "/", icon: MdOutlineDashboard },
-        { name: "user", link: "/", icon: AiOutlineUser },
+        { name: "dashboard", link: "/dashboard", icon: MdOutlineDashboard },
+        { name: "usesdsdsdsdsr", link: "/", icon: AiOutlineUser },
         { name: "messages", link: "/", icon: FiMessageSquare },
         {
             name: "analytics",
@@ -40,17 +40,18 @@ const InternalSideBarRight = ({ open, setOpen }) => {
 
     return (
         <div
-            className={`bg-[#f49831] min-h-screen absolute right-0 ${
+            className={`bg-[#f49831] h-full ${
                 open ? "w-72" : "hidden"
             } duration-500 text-gray-100 px-4`}>
-            <div className="mt-4 flex flex-col gap-4 relative">
+            <div className="pt-4 flex flex-col gap-4 relative">
                 {menus?.map((menu, i) => (
                     <Link
                         to={menu?.link}
                         key={i}
-                        className={` ${
+                        className={`group ${
                             menu?.margin && "mt-5"
-                        } group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}>
+                        } flex items-center text-sm gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md cursor-pointer relative`}>
+                        {" "}
                         <div>
                             {React.createElement(menu?.icon, {
                                 size: "20",
@@ -69,7 +70,7 @@ const InternalSideBarRight = ({ open, setOpen }) => {
                         <h2
                             className={`${
                                 open && "hidden"
-                            } absolute right-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:right-14 group-hover:duration-300 group-hover:w-fit  `}>
+                            } absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}>
                             {menu?.name}
                         </h2>
                     </Link>

@@ -48,20 +48,17 @@ function App() {
                     <NavBar open={open} setOpen={setOpen} />
                 </div>
                 <div className="flex">
-                    <div className="">
-                        {isMobileView ? (
+                    {isMobileView ? (
+                        <div className="fixed right-0 overflow-y-auto z-10 h-full">
                             <InternalSideBarRight
                                 open={open}
                                 setOpen={setOpen}
                             />
-                        ) : (
-                            <InternalSideBarLeft
-                                open={open}
-                                setOpen={setOpen}
-                            />
-                        )}
-                    </div>
-                    <div className=" w-full">
+                        </div>
+                    ) : (
+                        <InternalSideBarLeft open={open} setOpen={setOpen} />
+                    )}
+                    <div className="w-full">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/Dashboard" element={<Dashboard />} />

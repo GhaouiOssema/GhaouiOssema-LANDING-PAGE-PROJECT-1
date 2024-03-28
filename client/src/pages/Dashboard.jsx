@@ -10,6 +10,12 @@ import {
 const Dashboard = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+    const [activeTab, setActiveTab] = useState("deliveries");
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+    };
+
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
@@ -25,10 +31,63 @@ const Dashboard = () => {
     return (
         <>
             {windowWidth < 1024 ? (
-                <div className="w-full mx-auto my-10">
+                <div className="w-full mx-auto px-5">
                     {carouselTitle?.map((elem, idx) => (
                         <Carousel key={idx} title={elem} />
                     ))}
+                    <div className="grid max-w-xl mx-auto px-3 border border-primary rounded-md mt-5 mb-5">
+                        <div className="text-center p-6">
+                            <div className="mb-15px flex items-center justify-around">
+                                <h3
+                                    className={`font-euclid text-primary text-sm font-semibold cursor-pointer ${
+                                        activeTab === "deliveries"
+                                            ? "text-blue-500"
+                                            : ""
+                                    }`}
+                                    onClick={() =>
+                                        handleTabClick("deliveries")
+                                    }>
+                                    Mes Livraisons
+                                </h3>
+                                <h3 className="font-euclid text-primary text-sm font-semibold">
+                                    |{" "}
+                                </h3>
+                                <h3
+                                    className={`font-euclid text-primary text-sm font-semibold cursor-pointer ${
+                                        activeTab === "announcements"
+                                            ? "text-blue-500"
+                                            : ""
+                                    }`}
+                                    onClick={() =>
+                                        handleTabClick("announcements")
+                                    }>
+                                    Mes annonces
+                                </h3>
+                            </div>
+                            <div className="">
+                                {activeTab === "deliveries" && (
+                                    <MidumeCardLayout
+                                        link="#"
+                                        label="Mes Livraisons en cours"
+                                        labelLink="Voir toutes mes livraisons"
+                                        text="Aucune livraison en cours"
+                                        textBtn="Rechercher un colis"
+                                        type="mobile"
+                                    />
+                                )}
+                                {activeTab === "announcements" && (
+                                    <MidumeCardLayout
+                                        link="#"
+                                        label="Mes annonces en cours"
+                                        labelLink="Voir toutes mes annonces"
+                                        text="Aucune annonce en cours"
+                                        textBtn="Ajouter une annonce"
+                                        type="mobile"
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             ) : (
                 <div className="max-w-[1280px] mx-auto px-3 pb-32 sm:px-8  sm:pb-32 pt-10">

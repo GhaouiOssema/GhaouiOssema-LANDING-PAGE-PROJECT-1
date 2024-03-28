@@ -6,13 +6,33 @@ import ProfileCard from "./card/ProfileCard";
 const Carousel = ({ title }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="grid max-w-xl mx-auto w-full px-3">
+        <div className="grid max-w-xl mx-auto w-full">
             <div className="py-5 border-b border-black">
                 <details className={`group ${isOpen ? "open" : ""}`}>
                     <summary
                         className="flex justify-between items-center font-medium cursor-pointer list-none"
                         onClick={() => setIsOpen((prev) => !prev)}>
-                        <span>{title}</span>
+                        <span>
+                            {title === "Mon Profile" ? (
+                                <div className="flex items-center">
+                                    <img
+                                        className="w-12 h-12 rounded-full mr-3"
+                                        src="https://loremflickr.com/320/320/girl"
+                                        alt="jane"
+                                    />
+                                    <div className="text-sm">
+                                        <a
+                                            href="#"
+                                            className="font-medium leading-none text-gray-900 hover:text-indigo-600 transition duration-500 ease-in-out">
+                                            Jane doe
+                                        </a>
+                                        <p>Blogger &amp; Youtuber</p>
+                                    </div>
+                                </div>
+                            ) : (
+                                title
+                            )}
+                        </span>
                         <span className="transition group-open:rotate-180">
                             <svg
                                 fill="none"
@@ -48,6 +68,7 @@ const Carousel = ({ title }) => {
                             </div>
                         ) : null}
                     </div>
+                    <div className="mt-5"></div>
                 </details>
             </div>
         </div>
