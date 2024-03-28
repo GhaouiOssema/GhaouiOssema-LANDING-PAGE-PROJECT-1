@@ -1,6 +1,6 @@
 const BottomNavBar = () => {
     return (
-        <div className="relative w-full -translate-x-1/2 bg-white border-t border-gray-200 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+        <div className="bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600 fixed bottom-0 z-50 w-full">
             <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
                 <button
                     data-tooltip-target="tooltip-home"

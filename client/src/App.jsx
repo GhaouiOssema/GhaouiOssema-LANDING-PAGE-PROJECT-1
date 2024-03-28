@@ -44,12 +44,12 @@ function App() {
     }, []);
 
     return (
-        <div className="w-full relative z-0 bg-white">
-            <div className="flex flex-col ">
+        <div className="w-full bg-white relative">
+            <div className="flex flex-col">
                 <div className="w-full">
                     <NavBar open={open} setOpen={setOpen} />
                 </div>
-                <div className="flex">
+                <div className="flex flex-1">
                     {isMobileView ? (
                         <div className="fixed right-0 overflow-y-auto z-10 h-full">
                             <InternalSideBarRight
@@ -60,9 +60,9 @@ function App() {
                     ) : (
                         <InternalSideBarLeft open={open} setOpen={setOpen} />
                     )}
-                    <div className="w-full">
+                    <div className="w-full overflow-y-auto my-2 py-auto">
                         <div className="w-full mx-auto px-5">
-                            <div className="grid max-w-xl lg:max-w-[1220px] mx-auto px-3 border border-primary rounded-md mt-5 mb-5">
+                            <div className="grid max-w-xl lg:max-w-[1220px] mx-auto px-3 border border-primary rounded-md">
                                 <IconBreadcrumbs />
                             </div>
                         </div>
@@ -82,12 +82,12 @@ function App() {
                         </Routes>
                     </div>
                 </div>
-                {isMobileView && <BottomNavBar />}
             </div>
-            {/* <div className=" h-screen" /> */}
-
-            {/* <StarsCanvas /> */}
-            {/* <Footer /> */}
+            {isMobileView && (
+                <div className="">
+                    <BottomNavBar />
+                </div>
+            )}
         </div>
     );
 }
